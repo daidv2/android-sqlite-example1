@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SQLiteTutorial</string>
+
+    <!-- Menu Item -->
+    <string name="menu_item_search">Search</string>
+    <string name="menu_item_about_app">About App</string>
+    <string name="menu_item_help">Help</string>
+    <string name="menu_item_version_app">Version %s</string>
+
+    <!-- Main Screen -->
+    <string name="mainscreen_empty_note">Your note list is empty, let start to create your first note now</string>
 </resources>
