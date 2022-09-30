@@ -9,4 +9,6 @@
 
     <!-- Main Screen -->
     <string name="mainscreen_empty_note">Your note list is empty, let start to create your first note now</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 </resources>
