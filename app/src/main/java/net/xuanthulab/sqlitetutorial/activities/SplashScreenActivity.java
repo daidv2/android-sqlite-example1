@@ -1,4 +1,4 @@
-package net.xuanthulab.sqlitetutorial;
+package net.xuanthulab.sqlitetutorial.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(this, ActionBar.class);
+        Intent intent = new Intent(this, ExpandableListViewActivity.class);
         startActivity(intent);
         finish();
     }

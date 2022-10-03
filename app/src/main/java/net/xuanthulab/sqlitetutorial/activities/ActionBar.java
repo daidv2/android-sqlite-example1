@@ -1,4 +1,4 @@
-package net.xuanthulab.sqlitetutorial;
+package net.xuanthulab.sqlitetutorial.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import net.xuanthulab.sqlitetutorial.R;
 
 public class ActionBar extends AppCompatActivity {
     private DrawerLayout drawerLayout;
