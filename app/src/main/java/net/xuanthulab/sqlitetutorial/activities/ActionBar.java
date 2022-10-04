@@ -1,5 +1,6 @@
 package net.xuanthulab.sqlitetutorial.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -30,6 +31,9 @@ public class ActionBar extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    // onSaveInstanceState: lưu lại state trước khi hủy activity
+    // onRestoreInstanceState: Mỗi khi OnCreate khởi chạy, nếu có trạng thái được lưu lại
+    // thì sau khi gọi onCreate Activity sẽ tự động gọi phương thức onRestoreInstanceState
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -61,15 +65,22 @@ public class ActionBar extends AppCompatActivity {
             return true;
         }
 
+        Bundle bundle = new Bundle();
         switch (item.getItemId()) {
             case R.id.search:
                 Toast.makeText(this, "Search button selected", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.about:
-                Toast.makeText(this, "About button selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, ContactActivity.class);
+                bundle.putString(ContactActivity.KEY_SHOW_WHAT, ContactActivity.VALUE_SHOW_ABOUT);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 return true;
             case R.id.help:
-                Toast.makeText(this, "Help button selected", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, ContactActivity.class);
+                bundle.putString(ContactActivity.KEY_SHOW_WHAT, ContactActivity.VALUE_SHOW_HELP);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 return true;
         }
 

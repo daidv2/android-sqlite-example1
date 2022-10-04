@@ -23,6 +23,7 @@
         <activity android:name=".activities.EditProduct" />
         <activity android:name=".activities.ActionBar" />
         <activity android:name=".activities.ExpandableListViewActivity" />
+        <activity android:name=".activities.ContactActivity"/>
     </application>
 
 </manifest>

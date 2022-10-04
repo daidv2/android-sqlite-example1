@@ -10,7 +10,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(this, ExpandableListViewActivity.class);
+        // Intent intent = new Intent(this, ExpandableListViewActivity.class);
+        Intent intent = new Intent(this, ActionBar.class);
         startActivity(intent);
         finish();
     }
