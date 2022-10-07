@@ -32,7 +32,7 @@ public class FirstFragment extends Fragment {
         Button btnItem1 = (Button) view.findViewById(R.id.btnItem1);
         Button btnItem2 = (Button) view.findViewById(R.id.btnItem2);
 
-        btnItem1.setOnClickListener(new View.OnClickListener(){
+        btnItem1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
@@ -41,7 +41,7 @@ public class FirstFragment extends Fragment {
                 }
             }
         });
-        btnItem2.setOnClickListener(new View.OnClickListener(){
+        btnItem2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
