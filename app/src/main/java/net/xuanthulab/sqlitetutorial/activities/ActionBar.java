@@ -8,9 +8,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import net.xuanthulab.sqlitetutorial.R;
+import net.xuanthulab.sqlitetutorial.fragments.DialogFragmentSample;
 
 public class ActionBar extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -29,6 +32,16 @@ public class ActionBar extends AppCompatActivity {
         // set icon hamburger xuất hiện trên ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        // Hiển thị Dialog Fragment
+        Button btnShowDislogFragment = (Button) findViewById(R.id.activity_main_btn_show_dialogfragment);
+        btnShowDislogFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragmentSample dialogFragmentSample = new DialogFragmentSample();
+                dialogFragmentSample.show(getSupportFragmentManager(), "Dialog Fragment");
+            }
+        });
     }
 
     // onSaveInstanceState: lưu lại state trước khi hủy activity

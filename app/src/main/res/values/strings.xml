@@ -11,4 +11,19 @@
     <string name="mainscreen_empty_note">Your note list is empty, let start to create your first note now</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- PreferenceFragment -->
+    <string-array name="entries_list_preference">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="entryvalues_list_preference">
+        <item>Value 1</item>
+        <item>Value 2</item>
+        <item>Value 3</item>
+    </string-array>
 </resources>
