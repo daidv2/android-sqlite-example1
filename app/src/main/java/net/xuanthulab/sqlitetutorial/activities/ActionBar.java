@@ -3,6 +3,7 @@ package net.xuanthulab.sqlitetutorial.activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -33,10 +34,37 @@ public class ActionBar extends AppCompatActivity implements FirstFragment.OnFirs
         getSupportActionBar().setHomeButtonEnabled(true);
 
         FirstFragment firstFragment = new FirstFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.firstFrame, firstFragment);
-        fragmentTransaction.commit();
+        if (findViewById(R.id.contentFrame) != null) {
+            // Found the ID of only one Fragment ==> Portrait mode
+            // Remove the existing fragment before add new one
+            if (savedInstanceState != null) {
+                getSupportFragmentManager().executePendingTransactions();
+                Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+                if (fragmentById != null) {
+                    getSupportFragmentManager().beginTransaction().remove(fragmentById).commit();
+                }
+            }
+
+            // Add new one
+            getSupportFragmentManager().beginTransaction().add(R.id.contentFrame, firstFragment).commit();
+        } else {
+            // Landscape mode
+            // Remove the existing fragments before add new one
+            if (savedInstanceState != null) {
+                getSupportFragmentManager().executePendingTransactions();
+                Fragment firstFragmentById = getSupportFragmentManager().findFragmentById(R.id.firstFrame);
+                if (firstFragmentById != null) {
+                    getSupportFragmentManager().beginTransaction().remove(firstFragmentById).commit();
+                }
+                Fragment secondFragmentById = getSupportFragmentManager().findFragmentById(R.id.secondFrame);
+                if (secondFragmentById != null) {
+                    getSupportFragmentManager().beginTransaction().remove(secondFragmentById).commit();
+                }
+            }
+
+            // Add new one
+            getSupportFragmentManager().beginTransaction().add(R.id.firstFrame, firstFragment).commit();
+        }
     }
 
     // onSaveInstanceState: lưu lại state trước khi hủy activity
@@ -98,9 +126,16 @@ public class ActionBar extends AppCompatActivity implements FirstFragment.OnFirs
     @Override
     public void onItemPressed(String content) {
         SecondFragment secondFragment = SecondFragment.newInstance(content);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.secondFrame, secondFragment);
-        fragmentTransaction.commit();
+        if (findViewById(R.id.contentFrame) != null) {
+            // Found the ID of only one Fragment ==> Portrait mode
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.contentFrame, secondFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        } else {
+            // Landscape mode
+            getSupportFragmentManager().beginTransaction().replace(R.id.secondFrame, secondFragment).commit();
+        }
     }
 }
