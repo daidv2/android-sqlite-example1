@@ -3,6 +3,9 @@ package net.xuanthulab.sqlitetutorial.activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +15,7 @@ import android.widget.Toast;
 
 import net.xuanthulab.sqlitetutorial.R;
 
-public class ActionBar extends AppCompatActivity {
+public class ActionBar extends AppCompatActivity implements FirstFragment.OnFirstFragmentListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
 
@@ -29,6 +32,39 @@ public class ActionBar extends AppCompatActivity {
         // set icon hamburger xuất hiện trên ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        FirstFragment firstFragment = new FirstFragment();
+        if (findViewById(R.id.contentFrame) != null) {
+            // Found the ID of only one Fragment ==> Portrait mode
+            // Remove the existing fragment before add new one
+            if (savedInstanceState != null) {
+                getSupportFragmentManager().executePendingTransactions();
+                Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+                if (fragmentById != null) {
+                    getSupportFragmentManager().beginTransaction().remove(fragmentById).commit();
+                }
+            }
+
+            // Add new one
+            getSupportFragmentManager().beginTransaction().add(R.id.contentFrame, firstFragment).commit();
+        } else {
+            // Landscape mode
+            // Remove the existing fragments before add new one
+            if (savedInstanceState != null) {
+                getSupportFragmentManager().executePendingTransactions();
+                Fragment firstFragmentById = getSupportFragmentManager().findFragmentById(R.id.firstFrame);
+                if (firstFragmentById != null) {
+                    getSupportFragmentManager().beginTransaction().remove(firstFragmentById).commit();
+                }
+                Fragment secondFragmentById = getSupportFragmentManager().findFragmentById(R.id.secondFrame);
+                if (secondFragmentById != null) {
+                    getSupportFragmentManager().beginTransaction().remove(secondFragmentById).commit();
+                }
+            }
+
+            // Add new one
+            getSupportFragmentManager().beginTransaction().add(R.id.firstFrame, firstFragment).commit();
+        }
     }
 
     // onSaveInstanceState: lưu lại state trước khi hủy activity
@@ -85,5 +121,21 @@ public class ActionBar extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemPressed(String content) {
+        SecondFragment secondFragment = SecondFragment.newInstance(content);
+        if (findViewById(R.id.contentFrame) != null) {
+            // Found the ID of only one Fragment ==> Portrait mode
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.contentFrame, secondFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        } else {
+            // Landscape mode
+            getSupportFragmentManager().beginTransaction().replace(R.id.secondFrame, secondFragment).commit();
+        }
     }
 }
